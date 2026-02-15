@@ -1,5 +1,6 @@
 {
   "name": "Cercle IA",
+  "initialRoute": "fr/introduction",
   "template": "classic",
   "colors": {
     "light": {
@@ -14,108 +15,222 @@
     }
   },
   "navigation": {
-    "tabs": [
+    "languages": [
       {
-        "tab": "Documentation",
-        "icon": "book",
-        "groups": [
+        "language": "Français",
+        "tabs": [
           {
-            "group": "Getting Started",
-            "icon": "rocket",
+            "tab": "Documentation",
+            "icon": "book",
+            "groups": [
+              {
+                "group": "Bien démarrer",
+                "icon": "rocket",
+                "pages": [
+                  {
+                    "title": "Introduction",
+                    "path": "fr/introduction",
+                    "icon": "home"
+                  },
+                  {
+                    "title": "Démarrage rapide",
+                    "path": "fr/quickstart",
+                    "icon": "zap"
+                  }
+                ]
+              },
+              {
+                "group": "Concepts clés",
+                "icon": "layers",
+                "pages": [
+                  {
+                    "title": "Fonctionnalités",
+                    "path": "fr/features",
+                    "icon": "file-text"
+                  },
+                  {
+                    "title": "Confidentialité",
+                    "path": "fr/privacy",
+                    "icon": "file-text"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "Référence API",
+            "icon": "code",
+            "groups": [
+              {
+                "group": "Points de terminaison",
+                "openapi": "api-reference/openapi.yaml",
+                "pages": []
+              }
+            ]
+          },
+          {
+            "tab": "Centre d'aide",
+            "icon": "help-circle",
             "pages": [
               {
-                "title": "Introduction",
-                "path": "introduction",
+                "title": "Centre d'aide",
+                "path": "fr/help-center",
                 "icon": "home"
               },
               {
-                "title": "Quickstart",
-                "path": "quickstart",
-                "icon": "zap"
-              }
-            ]
-          },
-          {
-            "group": "Core Concepts",
-            "icon": "layers",
-            "pages": [
-              {
-                "title": "Features",
-                "path": "features",
-                "icon": "file-text"
+                "group": "FAQ",
+                "icon": "help-circle",
+                "expandable": false,
+                "pages": [
+                  {
+                    "title": "FAQ - Bien démarrer",
+                    "path": "fr/help-center/faq/getting-started"
+                  }
+                ]
               },
               {
-                "title": "Privacy",
-                "path": "privacy",
-                "icon": "file-text"
+                "group": "Dépannage",
+                "icon": "alert-circle",
+                "expandable": false,
+                "pages": [
+                  {
+                    "title": "Problèmes de connexion",
+                    "path": "fr/help-center/troubleshooting/login-issues"
+                  }
+                ]
+              },
+              {
+                "group": "Guides",
+                "icon": "book-open",
+                "expandable": false,
+                "pages": [
+                  {
+                    "title": "Créer un projet",
+                    "path": "fr/help-center/guides/create-project"
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "tab": "Journal des modifications",
+            "icon": "clock",
+            "pages": [
+              {
+                "title": "Historique des versions",
+                "path": "fr/changelog",
+                "icon": "history"
               }
             ]
           }
         ]
       },
       {
-        "tab": "API Reference",
-        "icon": "code",
-        "groups": [
+        "language": "English",
+        "tabs": [
           {
-            "group": "Endpoints",
-            "openapi": "api-reference/openapi.yaml",
-            "pages": []
-          }
-        ]
-      },
-      {
-        "tab": "Help Center",
-        "icon": "help-circle",
-        "pages": [
-          {
-            "title": "Help Center",
-            "path": "help-center",
-            "icon": "home"
+            "tab": "Documentation",
+            "icon": "book",
+            "groups": [
+              {
+                "group": "Getting Started",
+                "icon": "rocket",
+                "pages": [
+                  {
+                    "title": "Introduction",
+                    "path": "introduction",
+                    "icon": "home"
+                  },
+                  {
+                    "title": "Quickstart",
+                    "path": "quickstart",
+                    "icon": "zap"
+                  }
+                ]
+              },
+              {
+                "group": "Core Concepts",
+                "icon": "layers",
+                "pages": [
+                  {
+                    "title": "Features",
+                    "path": "features",
+                    "icon": "file-text"
+                  },
+                  {
+                    "title": "Privacy",
+                    "path": "privacy",
+                    "icon": "file-text"
+                  }
+                ]
+              }
+            ]
           },
           {
-            "group": "FAQs",
+            "tab": "API Reference",
+            "icon": "code",
+            "groups": [
+              {
+                "group": "Endpoints",
+                "openapi": "api-reference/openapi.yaml",
+                "pages": []
+              }
+            ]
+          },
+          {
+            "tab": "Help Center",
             "icon": "help-circle",
-            "expandable": false,
             "pages": [
               {
-                "title": "Getting Started FAQ",
-                "path": "help-center/faq/getting-started"
+                "title": "Help Center",
+                "path": "help-center",
+                "icon": "home"
+              },
+              {
+                "group": "FAQs",
+                "icon": "help-circle",
+                "expandable": false,
+                "pages": [
+                  {
+                    "title": "Getting Started FAQ",
+                    "path": "help-center/faq/getting-started"
+                  }
+                ]
+              },
+              {
+                "group": "Troubleshooting",
+                "icon": "alert-circle",
+                "expandable": false,
+                "pages": [
+                  {
+                    "title": "Login Issues",
+                    "path": "help-center/troubleshooting/login-issues"
+                  }
+                ]
+              },
+              {
+                "group": "Guides",
+                "icon": "book-open",
+                "expandable": false,
+                "pages": [
+                  {
+                    "title": "Create Project",
+                    "path": "help-center/guides/create-project"
+                  }
+                ]
               }
             ]
           },
           {
-            "group": "Troubleshooting",
-            "icon": "alert-circle",
-            "expandable": false,
+            "tab": "Changelog",
+            "icon": "clock",
             "pages": [
               {
-                "title": "Login Issues",
-                "path": "help-center/troubleshooting/login-issues"
+                "title": "Release History",
+                "path": "changelog",
+                "icon": "history"
               }
             ]
-          },
-          {
-            "group": "Guides",
-            "icon": "book-open",
-            "expandable": false,
-            "pages": [
-              {
-                "title": "Create Project",
-                "path": "help-center/guides/create-project"
-              }
-            ]
-          }
-        ]
-      },
-      {
-        "tab": "Changelog",
-        "icon": "clock",
-        "pages": [
-          {
-            "title": "Release History",
-            "path": "changelog",
-            "icon": "history"
           }
         ]
       }

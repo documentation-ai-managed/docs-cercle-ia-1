@@ -1,0 +1,177 @@
+---
+title: Paramètres de confidentialité et de sécurité
+description: Découvrez comment Cercle IA protège vos données grâce à l’anonymisation et aux modèles privés afin de garantir la confidentialité des tâches sensibles.
+---
+
+## Vue d’ensemble
+
+Cercle IA place la confidentialité de vos données au premier plan. Vous pouvez activer l’anonymisation automatique, configurer Private GPT pour l’hébergement local des modèles et gérer vos préférences de partage directement depuis votre tableau de bord. Ces fonctionnalités garantissent que les informations sensibles restent sécurisées, en particulier lorsque vous utilisez plusieurs modèles d’IA.
+
+<Callout kind="info">
+
+Cercle IA ne partage jamais vos requêtes ni vos réponses avec des fournisseurs tiers, sauf configuration explicite de votre part. Private GPT exécute les modèles sur des serveurs isolés pour une confidentialité maximale.
+
+</Callout>
+
+## Activer l’anonymisation automatique des données
+
+L’anonymisation automatique supprime les informations personnellement identifiables (PII) de vos entrées avant qu’elles ne soient envoyées à des modèles d’IA externes. Cette fonctionnalité est désactivée par défaut.
+
+<Steps>
+  <Step title="Accéder aux paramètres" icon="settings">
+
+    Accédez à votre tableau de bord à l’adresse `https://dashboard.example.com/settings/privacy`.
+
+  </Step>
+  <Step title="Basculer l’anonymisation" icon="shield">
+
+    Recherchez l’interrupteur `Enable Automatic Anonymization` et activez-le.
+
+  </Step>
+  <Step title="Vérifier la configuration" icon="check-circle">
+
+    Testez avec une requête d’exemple contenant de fausses PII, par exemple `john.doe@example.com`.
+
+  </Step>
+</Steps>
+
+<ParamField path="privacy.anonymize" param-type="boolean" required="false" default="false">
+
+  Supprime automatiquement des PII comme les e-mails, noms et numéros de téléphone des requêtes.
+
+</ParamField>
+
+<ParamField path="privacy.redact_patterns" param-type="array" required="false">
+
+  Expressions régulières personnalisées pour une rédaction supplémentaire, par exemple `["\\b[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,}\\b"]`.
+
+</ParamField>
+
+## Configurer Private GPT pour l’hébergement local
+
+Private GPT héberge les modèles localement sur les serveurs de Cercle IA, garantissant qu’aucune donnée ne quitte votre environnement contrôlé. Utilisez-le pour les tâches confidentielles.
+
+<Tabs>
+  <Tab title="Configuration via le tableau de bord" icon="monitor">
+
+    <Steps>
+      <Step title="Sélectionner Private GPT" icon="lock">
+
+        Dans le sélecteur de modèles, choisissez `Private GPT` dans la liste déroulante.
+
+      </Step>
+      <Step title="Téléverser un modèle personnalisé" icon="upload">
+
+        Glissez-déposez votre fichier de modèle affiné (format GGUF recommandé).
+
+      </Step>
+    </Steps>
+
+  </Tab>
+  <Tab title="Configuration via l’API" icon="code">
+
+    Configurez-le via l’API pour un accès programmatique.
+
+````javascript
+const config = {
+  model: "private-gpt-local",
+  privacy: {
+    localOnly: true,
+    maxTokens: 4096
+  }
+};
+
+const response = await fetch("https://api.example.com/v1/chat/completions", {
+  method: "POST",
+  headers: { "Authorization": `Bearer ${YOUR_API_KEY}` },
+  body: JSON.stringify({ ...config, messages: [...] })
+});
+````
+  </Tab>
+</Tabs>
+
+<CodeGroup tabs="JavaScript,Python">
+````javascript
+// Activer Private GPT dans le client
+const cercleIA = new CercleIA({ apiKey: 'YOUR_API_KEY' });
+cercleIA.setPrivacyMode('private-gpt');
+````
+
+````python
+# Activer Private GPT dans le SDK Python
+import cercle_ia
+
+client = cercle_ia.CercleIA(api_key="YOUR_API_KEY")
+client.config.privacy_mode = "private-gpt"
+````
+</CodeGroup>
+
+## Gérer les préférences de partage des données
+
+Contrôlez quelles données Cercle IA stocke ou partage.
+
+| Préférence             | Description                               | Valeur par défaut       |
+|------------------------|-------------------------------------------|-------------------------|
+| Stocker les conversations | Conserver l’historique de chat pendant 30 jours | Activé                  |
+| Partager avec les modèles | Envoyer aux fournisseurs externes          | Désactivé pour Private GPT |
+| Exclusion des analyses | Exclure des statistiques d’utilisation    | Désactivé               |
+
+<ParamField query="store_conversations" param-type="boolean" required="false" default="true">
+
+  Active ou désactive le stockage de l’historique des conversations.
+
+</ParamField>
+
+<ParamField query="share_analytics" param-type="boolean" required="false" default="false">
+
+  Autorise l’utilisation de données anonymisées pour l’amélioration du produit.
+
+</ParamField>
+
+## Bonnes pratiques pour les informations confidentielles
+
+Suivez ces recommandations pour maximiser la sécurité.
+
+<Columns cols={2}>
+  <Card title="Utiliser Private GPT" icon="shield" horizontal>
+
+    Pour les données sensibles, sélectionnez toujours les modèles Private GPT. Aucune transmission vers l’extérieur n’a lieu.
+
+  </Card>
+  <Card title="Consulter les journaux" icon="file-text">
+
+    Vérifiez régulièrement les journaux d’audit à l’adresse `https://dashboard.example.com/logs`.
+
+  </Card>
+  <Card title="Rédaction personnalisée" icon="edit-3">
+
+    Définissez `redact_patterns` pour des PII spécifiques à votre domaine.
+
+  </Card>
+  <Card title="Sécuriser les clés API" icon="key">
+
+    Faites tourner vos clés chaque mois et utilisez des variables d’environnement.
+
+  </Card>
+</Columns>
+
+<Expandable title="Avancé : Private GPT auto-hébergé" default-open="false">
+
+Pour un contrôle maximal, déployez Private GPT sur votre propre infrastructure.
+
+````bash
+# Configuration Docker
+docker run -d -p 8000:8000 \
+  -v /path/to/models:/models \
+  cercleia/private-gpt:latest
+````
+
+Connectez-vous via le point de terminaison `https://api.example.com/private-gpt`.
+
+</Expandable>
+
+<Callout kind="tip">
+
+Testez d’abord vos configurations dans un environnement de bac à sable. Consultez le [Guide de démarrage rapide](/fr/quickstart) pour la configuration initiale.
+
+</Callout>
